@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Iniciar sesión | ANUNCIA{% endblock %}
+
+{% block content %}
+
+<div class="auth-container">
+
+    <div class="auth-card">
+
+        <div class="text-center mb-4">
+            <div class="brand-icon mx-auto mb-3"
+                 style="width:60px;height:60px;font-size:25px;">
+                A
+            </div>
+
+            <h2 class="auth-title">Bienvenido a ANUNCIA</h2>
+            <p class="text-secondary">
+                Ingresa para acceder a tu cuenta.
+            </p>
+        </div>
+
+        <form method="POST">
+
+            {{ form.hidden_tag() }}
+
+            <div class="mb-3">
+                {{ form.correo.label(class="form-label fw-semibold") }}
+                {{ form.correo(class="form-control form-control-lg",
+                               placeholder="correo@ejemplo.com") }}
+                {% for error in form.correo.errors %}
+                    <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+            </div>
+
+            <div class="mb-4">
+                {{ form.password.label(class="form-label fw-semibold") }}
+                {{ form.password(class="form-control form-control-lg",
+                                 placeholder="Tu contraseña") }}
+                {% for error in form.password.errors %}
+                    <small class="text-danger">{{ error }}</small>
+                {% endfor %}
+            </div>
+
+            {{ form.submit(class="btn btn-anuncia btn-lg w-100") }}
+
+        </form>
+
+        <div class="text-center mt-4">
+            ¿No tienes una cuenta?
+            <a href="{{ url_for('auth.registro') }}">
+                Regístrate aquí
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

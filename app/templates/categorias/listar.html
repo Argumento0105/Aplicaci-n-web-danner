@@ -1,0 +1,88 @@
+
+{% extends "base.html" %}
+
+{% block title %}Gestión de categorías | ANUNCIA{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2>Gestión de categorías</h2>
+            <p class="text-muted">Administra las categorías de los anuncios.</p>
+        </div>
+
+        <a href="{{ url_for('categorias.nuevo') }}" class="btn btn-primary">
+            + Nueva categoría
+        </a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Estado</th>
+                            <th>Fecha de creación</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for categoria in categorias %}
+                        <tr>
+                            <td>{{ categoria.id }}</td>
+                            <td>{{ categoria.nombre }}</td>
+                            <td>{{ categoria.descripcion or 'Sin descripción' }}</td>
+                            <td>
+                                {% if categoria.estado %}
+                                    <span class="badge bg-success">Activa</span>
+                                {% else %}
+                                    <span class="badge bg-danger">Inactiva</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {{ categoria.fecha_creacion.strftime('%d/%m/%Y') }}
+                            </td>
+                            <td>
+                                <a href="{{ url_for('categorias.editar', id=categoria.id) }}"
+                                   class="btn btn-sm btn-warning">
+                                    Editar
+                                </a>
+
+                                <form method="POST"
+                                      action="{{ url_for('categorias.eliminar', id=categoria.id) }}"
+                                      class="d-inline"
+                                      onsubmit="return confirm('¿Deseas eliminar esta categoría?');">
+                                    <input type="hidden" name="csrf_token"
+                                           value="{{ csrf_token() }}">
+                                    <button type="submit" class="btn btn-sm btn-danger">
+                                        Eliminar
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="6" class="text-center text-muted">
+                                No existen categorías registradas.
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <a href="{{ url_for('main.dashboard') }}"
+       class="btn btn-outline-secondary mt-3">
+        Volver al panel
+    </a>
+
+</div>
+{% endblock %}

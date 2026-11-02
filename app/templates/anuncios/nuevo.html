@@ -1,0 +1,85 @@
+
+{% extends "base.html" %}
+
+{% block title %}Nuevo anuncio | ANUNCIA{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+
+                    <h2 class="mb-4">Registrar anuncio</h2>
+
+                    <form method="POST">
+                        <input type="hidden" name="csrf_token"
+                               value="{{ csrf_token() }}">
+
+                        <div class="mb-3">
+                            <label class="form-label">Título del anuncio</label>
+                            <input type="text" name="titulo"
+                                   class="form-control" maxlength="150" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Contenido</label>
+                            <textarea name="contenido" class="form-control"
+                                      rows="6" required></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Imagen (URL opcional)</label>
+                            <input type="url" name="imagen"
+                                   class="form-control"
+                                   placeholder="https://ejemplo.com/imagen.jpg">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Categoría</label>
+                            <select name="categoria_id" class="form-select" required>
+                                <option value="">Selecciona una categoría</option>
+                                {% for categoria in categorias %}
+                                <option value="{{ categoria.id }}">
+                                    {{ categoria.nombre }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Fecha de expiración</label>
+                            <input type="datetime-local" name="fecha_expiracion"
+                                   class="form-control">
+                            <small class="text-muted">
+                                Campo opcional.
+                            </small>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Estado</label>
+                            <select name="estado" class="form-select">
+                                <option value="borrador">Borrador</option>
+                                <option value="publicado">Publicado</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            Guardar anuncio
+                        </button>
+
+                        <a href="{{ url_for('anuncios.listar') }}"
+                           class="btn btn-secondary">
+                            Cancelar
+                        </a>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

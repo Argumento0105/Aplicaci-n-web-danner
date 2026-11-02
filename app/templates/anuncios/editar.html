@@ -1,0 +1,90 @@
+
+{% extends "base.html" %}
+
+{% block title %}Editar anuncio | ANUNCIA{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
+
+                    <h2 class="mb-4">Editar anuncio</h2>
+
+                    <form method="POST">
+                        <input type="hidden" name="csrf_token"
+                               value="{{ csrf_token() }}">
+
+                        <div class="mb-3">
+                            <label class="form-label">Título</label>
+                            <input type="text" name="titulo"
+                                   class="form-control" maxlength="150"
+                                   value="{{ anuncio.titulo }}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Contenido</label>
+                            <textarea name="contenido" class="form-control"
+                                      rows="6" required>{{ anuncio.contenido }}</textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Imagen (URL opcional)</label>
+                            <input type="url" name="imagen"
+                                   class="form-control"
+                                   value="{{ anuncio.imagen or '' }}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Categoría</label>
+                            <select name="categoria_id" class="form-select" required>
+                                {% for categoria in categorias %}
+                                <option value="{{ categoria.id }}"
+                                    {% if categoria.id == anuncio.categoria_id %}selected{% endif %}>
+                                    {{ categoria.nombre }}
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Fecha de expiración</label>
+                            <input type="datetime-local" name="fecha_expiracion"
+                                   class="form-control"
+                                   value="{{ anuncio.fecha_expiracion.strftime('%Y-%m-%dT%H:%M') if anuncio.fecha_expiracion else '' }}">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Estado</label>
+                            <select name="estado" class="form-select">
+                                <option value="borrador"
+                                    {% if anuncio.estado == "borrador" %}selected{% endif %}>
+                                    Borrador
+                                </option>
+                                <option value="publicado"
+                                    {% if anuncio.estado == "publicado" %}selected{% endif %}>
+                                    Publicado
+                                </option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            Guardar cambios
+                        </button>
+
+                        <a href="{{ url_for('anuncios.listar') }}"
+                           class="btn btn-secondary">
+                            Cancelar
+                        </a>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

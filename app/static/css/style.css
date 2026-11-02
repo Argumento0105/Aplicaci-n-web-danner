@@ -1,0 +1,157 @@
+:root {
+    --primary: #142c4e;
+    --secondary: #176b87;
+    --accent: #20b8a6;
+    --background: #f3f6fa;
+    --text: #243247;
+}
+
+body {
+    background: var(--background);
+    color: var(--text);
+    font-family: "Segoe UI", Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+.navbar-anuncia {
+    background: var(--primary);
+    padding: 17px 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+}
+
+.brand-icon {
+    display: inline-flex;
+    background: var(--accent);
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 9px;
+    align-items: center;
+    justify-content: center;
+    margin-right: 5px;
+}
+
+.btn-anuncia {
+    background: var(--accent);
+    color: white;
+    border: none;
+    font-weight: 600;
+}
+
+.btn-anuncia:hover {
+    background: #159b8d;
+    color: white;
+}
+
+.card-anuncia {
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 5px 20px rgba(20, 44, 78, 0.07);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card-anuncia:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(20, 44, 78, 0.12);
+}
+
+.auth-container {
+    max-width: 460px;
+    margin: 45px auto;
+}
+
+.auth-card {
+    background: white;
+    padding: 35px;
+    border-radius: 18px;
+    box-shadow: 0 10px 35px rgba(20, 44, 78, 0.09);
+}
+
+.auth-title {
+    color: var(--primary);
+    font-weight: 800;
+}
+
+.footer-anuncia {
+    background: var(--primary);
+    color: white;
+    padding: 30px 0;
+    margin-top: 50px;
+}
+
+.dashboard-card {
+    border: none;
+    border-radius: 15px;
+    padding: 25px;
+    color: white;
+}
+
+.dashboard-card h2 {
+    font-size: 35px;
+    font-weight: 800;
+}
+
+.dashboard-users {
+    background: linear-gradient(135deg, #176b87, #2998b5);
+}
+
+.dashboard-categories {
+    background: linear-gradient(135deg, #6844a5, #9870d5);
+}
+
+.dashboard-announcements {
+    background: linear-gradient(135deg, #159b8d, #20b8a6);
+}
+:root {
+    --color-principal: #102b50;
+    --color-secundario: #164b80;
+    --color-acento: #d6a83c;
+    --color-fondo: #f3f6fa;
+}
+
+body {
+    background-color: var(--color-fondo);
+    font-family: Arial, sans-serif;
+}
+
+.navbar {
+    background-color: var(--color-principal) !important;
+}
+
+.navbar-brand {
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.btn-primary {
+    background-color: var(--color-secundario);
+    border-color: var(--color-secundario);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-principal);
+}
+
+.card {
+    border: none;
+    border-radius: 12px;
+}
+
+.card {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+footer {
+    background-color: var(--color-principal);
+    color: white;
+}
+
+footer small {
+    color: #d6a83c;
+}

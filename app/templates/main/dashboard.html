@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}Panel administrativo | ANUNCIA{% endblock %}
+
+{% block content %}
+
+<div class="mb-4">
+
+    <span class="badge bg-success">ADMINISTRADOR</span>
+
+    <h1 class="fw-bold mt-2">Panel de administración</h1>
+
+    <p class="text-secondary">
+        Bienvenido, {{ current_user.nombre }}.
+        Aquí puedes controlar la información del sistema.
+    </p>
+
+</div>
+
+<div class="row g-4">
+
+    <div class="col-md-4">
+        <div class="dashboard-card dashboard-users">
+            <p class="mb-2">Usuarios registrados</p>
+            <h2>{{ total_usuarios }}</h2>
+            <span>Personas en el sistema</span>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="dashboard-card dashboard-categories">
+            <p class="mb-2">Categorías</p>
+            <h2>{{ total_categorias }}</h2>
+            <span>Clasificaciones disponibles</span>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="dashboard-card dashboard-announcements">
+            <p class="mb-2">Anuncios</p>
+            <h2>{{ total_anuncios }}</h2>
+            <span>Publicaciones registradas</span>
+        </div>
+    </div>
+
+</div>
+
+<div class="card card-anuncia mt-5 p-4">
+
+    <h4 class="fw-bold mb-3">Administración del sistema</h4>
+
+    <div class="row g-3">
+
+        <div class="col-md-4">
+            <a href="{{ url_for('usuarios.listar') }}" class="btn btn-outline-primary w-100 p-3">
+                <strong>👥 Usuarios</strong>
+                <br>
+                <small>Gestionar usuarios</small>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="{{ url_for('categorias.listar') }}" class="btn btn-outline-primary w-100 p-3">
+                <strong>📂 Categorías</strong>
+                <br>
+                <small>Gestionar categorías</small>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a href="{{ url_for('anuncios.listar') }}" class="btn btn-outline-primary w-100 p-3">
+                <strong>📢 Anuncios</strong>
+                <br>
+                <small>Gestionar publicaciones</small>
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

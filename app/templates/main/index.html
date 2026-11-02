@@ -1,0 +1,238 @@
+ 
+{% extends "base.html" %}
+
+{% block title %}Inicio | Tablón de Anuncios ESPRES UPEA{% endblock %}
+
+{% block content %}
+
+<!-- PORTADA PRINCIPAL -->
+<section class="p-4 p-lg-5 mb-5 rounded-4 text-white"
+         style="background: linear-gradient(120deg, #102b50, #176b87);">
+
+    <div class="row align-items-center">
+
+        <div class="col-lg-8">
+
+            <span class="badge bg-info text-dark mb-3">
+                TABLÓN DIGITAL INSTITUCIONAL
+            </span>
+
+            <h1 class="display-5 fw-bold">
+                Tablón de Anuncios
+                <span class="text-info">ESPRES UPEA</span>
+            </h1>
+
+            <p class="lead mt-3">
+                Encuentra en un solo lugar comunicados, eventos,
+                convocatorias, actividades y oportunidades de nuestra comunidad.
+            </p>
+
+            <a href="#anuncios" class="btn btn-light btn-lg mt-3">
+                <i class="bi bi-megaphone-fill"></i>
+                Explorar anuncios
+            </a>
+
+        </div>
+
+        <div class="col-lg-4 text-center mt-4 mt-lg-0">
+
+            <div style="font-size: 100px;">📢</div>
+
+            <h3 class="fw-bold">ESPRES UPEA</h3>
+
+            <p>Información institucional al alcance de todos.</p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CATEGORÍAS -->
+<section class="mb-5">
+
+    <div class="mb-4">
+        <h2 class="fw-bold">Explora las categorías</h2>
+
+        <p class="text-secondary">
+            Encuentra fácilmente la información que estás buscando.
+        </p>
+    </div>
+
+    <div class="row g-3">
+
+        {% for categoria in categorias %}
+
+        <div class="col-6 col-md-4 col-lg-3">
+
+            <div class="card card-anuncia h-100 p-3">
+
+                <div class="card-body">
+
+                    <div class="fs-2 mb-2">📂</div>
+
+                    <h5 class="fw-bold">
+                        {{ categoria.nombre }}
+                    </h5>
+
+                    <p class="text-secondary small mb-0">
+                        {{ categoria.descripcion or 'Información institucional' }}
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% else %}
+
+        <div class="col-12">
+
+            <div class="alert alert-light border">
+                Todavía no hay categorías disponibles.
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+
+<!-- ANUNCIOS PUBLICADOS -->
+<section id="anuncios">
+
+    <div class="d-flex justify-content-between align-items-center flex-wrap mb-4">
+
+        <div>
+            <h2 class="fw-bold">Últimos anuncios</h2>
+
+            <p class="text-secondary mb-0">
+                Mantente informado sobre las últimas publicaciones.
+            </p>
+        </div>
+
+        <span class="badge bg-primary rounded-pill px-3 py-2">
+            {{ anuncios|length }} publicaciones
+        </span>
+
+    </div>
+
+
+    <div class="row g-4">
+
+        {% for anuncio in anuncios %}
+
+        <div class="col-md-6 col-lg-4">
+
+            <article class="card card-anuncia h-100 overflow-hidden">
+
+                {% if anuncio.imagen %}
+
+                <img src="{{ anuncio.imagen }}"
+                     class="card-img-top"
+                     style="height: 210px; object-fit: cover;"
+                     alt="{{ anuncio.titulo }}"
+                     onerror="this.style.display='none';">
+
+                {% else %}
+
+                <div class="d-flex align-items-center justify-content-center bg-light"
+                     style="height: 150px; font-size: 65px;">
+                    📢
+                </div>
+
+                {% endif %}
+
+
+                <div class="card-body d-flex flex-column">
+
+                    <div class="mb-2">
+
+                        <span class="badge bg-info text-dark">
+                            {{ anuncio.categoria.nombre }}
+                        </span>
+
+                    </div>
+
+                    <h5 class="fw-bold">
+                        {{ anuncio.titulo }}
+                    </h5>
+
+                    <p class="text-secondary">
+                        {{ anuncio.contenido[:150] }}
+                        {% if anuncio.contenido|length > 150 %}...{% endif %}
+                    </p>
+
+                    <div class="mt-auto pt-3 border-top">
+
+                        <small class="text-secondary d-block">
+                            <i class="bi bi-person-circle"></i>
+                            Publicado por
+                            {{ anuncio.usuario.nombre }}
+                        </small>
+
+                        <small class="text-secondary d-block mt-1">
+                            <i class="bi bi-calendar3"></i>
+                            {{ anuncio.fecha_publicacion.strftime('%d/%m/%Y') }}
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+        {% else %}
+
+        <div class="col-12">
+
+            <div class="alert alert-light border text-center p-5">
+
+                <div class="fs-1">📭</div>
+
+                <h5 class="fw-bold mt-2">
+                    Todavía no hay anuncios publicados.
+                </h5>
+
+                <p class="text-secondary mb-0">
+                    Vuelve pronto para descubrir nuevas publicaciones.
+                </p>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+
+<!-- INFORMACIÓN INSTITUCIONAL -->
+<section class="mt-5 mb-4">
+
+    <div class="rounded-4 p-4 text-center"
+         style="background-color: #eaf2f8;">
+
+        <h3 class="fw-bold">
+            Siempre informado, siempre conectado.
+        </h3>
+
+        <p class="text-secondary mb-0">
+            Consulta las publicaciones y mantente al día con las
+            novedades de nuestra comunidad institucional.
+        </p>
+
+    </div>
+
+</section>
+
+{% endblock %}
